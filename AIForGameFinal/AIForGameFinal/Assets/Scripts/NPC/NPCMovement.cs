@@ -4,6 +4,7 @@ using UnityEngine;
 public class NPCMovement : MonoBehaviour
 {
     [SerializeField]private Animator animator;
+    [SerializeField]private CharacterController characterController;
     [SerializeField]private float moveSpeed = 1;
     [SerializeField]private float wanderRadius = 5f;
     [SerializeField]private float waitTime = 2f;
@@ -13,7 +14,6 @@ public class NPCMovement : MonoBehaviour
     private bool isWaiting = true;
     private float currentSpeed;
     private Coroutine toIdleCoroutine;
-    //LayerMask layerMask = LayerMask.GetMask("Default");
 
     private void Start() 
     {
@@ -78,14 +78,13 @@ public class NPCMovement : MonoBehaviour
 
         }
 
-        RaycastHit hit;
+        //RaycastHit hit;
         Debug.DrawRay(transform.position + new Vector3(0, 0.5f, 0), transform.TransformDirection(Vector3.forward) * 3, Color.yellow); 
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), transform.TransformDirection(Vector3.forward), out hit, 3))
-
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), transform.TransformDirection(Vector3.forward), 3))
         { 
             PickNewDestination();
-            Debug.Log("Did Hit"); 
+            //Debug.Log("Did Hit"); 
         }
         else
         { 
@@ -118,8 +117,10 @@ public class NPCMovement : MonoBehaviour
         yield return null;
     }
 
-    // private void OnTriggerEnter(Collider other) {
-    //     PickNewDestination();
-    //     Debug.Log("TRIGGER");
-    // }
+    public void Kill()
+    {
+        animator.SetTrigger("Trigger_Die");
+        characterController.enabled = false;
+        transform.position -= new Vector3(0, 0.1f, 0);
+    }
 }
