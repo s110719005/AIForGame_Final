@@ -4,6 +4,7 @@ using UnityEngine;
 public class NPCMovement : MonoBehaviour
 {
     [SerializeField]private Animator animator;
+    [SerializeField]private CharacterController characterController;
     [SerializeField]private float moveSpeed = 1;
     [SerializeField]private float wanderRadius = 5f;
     [SerializeField]private float waitTime = 2f;
@@ -13,12 +14,12 @@ public class NPCMovement : MonoBehaviour
     private bool isWaiting = true;
     private float currentSpeed;
     private Coroutine toIdleCoroutine;
-    //LayerMask layerMask = LayerMask.GetMask("Default");
 
     private void Start() 
     {
         PickNewDestination();
         isWaiting = false;
+        animator.SetFloat("State", 0.7f);
     }
 
     public void OnUpdate()
@@ -40,8 +41,6 @@ public class NPCMovement : MonoBehaviour
         {
             Vector3 direction = (targetPosition - transform.position).normalized;
             //Move
-            //transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            
             animator.SetFloat("Vert", currentSpeed);
 
             //Rotation
@@ -63,29 +62,16 @@ public class NPCMovement : MonoBehaviour
                     toIdleCoroutine = null;
                 }
                 toIdleCoroutine = StartCoroutine(ChangeToIdleCoroutine());
-                //TODO: a slow down coroutine
-                //animator.SetFloat("Hor", 0);
-                //animator.SetFloat("Vert", 0);
             }
         }
 
-        // 動畫控制
-        if (animator != null)
-        {
-            bool isMoving = !isWaiting && Vector3.Distance(transform.position, targetPosition) > 0.1f;
-
-            animator.SetFloat("State", 0.7f);
-
-        }
-
-        RaycastHit hit;
+        //RaycastHit hit;
         Debug.DrawRay(transform.position + new Vector3(0, 0.5f, 0), transform.TransformDirection(Vector3.forward) * 3, Color.yellow); 
         // Does the ray intersect any objects excluding the player layer
-        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), transform.TransformDirection(Vector3.forward), out hit, 3))
-
+        if (Physics.Raycast(transform.position + new Vector3(0, 0.5f, 0), transform.TransformDirection(Vector3.forward), 3))
         { 
             PickNewDestination();
-            Debug.Log("Did Hit"); 
+            //Debug.Log("Did Hit"); 
         }
         else
         { 
@@ -118,8 +104,10 @@ public class NPCMovement : MonoBehaviour
         yield return null;
     }
 
-    // private void OnTriggerEnter(Collider other) {
-    //     PickNewDestination();
-    //     Debug.Log("TRIGGER");
-    // }
+    public void Kill()
+    {
+        animator.SetTrigger("Trigger_Die");
+        characterController.enabled = false;
+        transform.position -= new Vector3(0, 0.1f, 0);
+    }
 }
