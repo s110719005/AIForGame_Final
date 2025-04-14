@@ -2,14 +2,10 @@ using UnityEngine;
 
 public class SniperPlayer : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject sniperPlayer;
-    [SerializeField]
-    private Camera sniperCamera;
-    [SerializeField]
-    private float horizontalSpeed = 5;
-    [SerializeField]
-    private float cameraSensitivity = 5;
+    [SerializeField] private GameObject sniperPlayer;
+    [SerializeField] private Camera sniperCamera;
+    [SerializeField] private float horizontalSpeed = 5;
+    [SerializeField] private float cameraSensitivity = 5;
     private float xRotation = 0f;
     LayerMask layerMask;
     private GameObject currentSelect;
@@ -54,16 +50,6 @@ public class SniperPlayer : MonoBehaviour
             sniperCamera.transform.localEulerAngles = new Vector3(xRotation, sniperCamera.transform.localEulerAngles.y, 0f);
         }
 
-        // Ray ray = sniperCamera.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
-
-        // Debug.DrawRay(ray.origin, ray.direction * 1000f, Color.red);
-
-        // RaycastHit hit;
-        // if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
-        // {
-        //     Debug.Log("RAYCAST HIT: " + hit.collider.name);
-        // }
-
         RaycastHit hit;
         Debug.DrawRay(sniperCamera.transform.position, sniperCamera.transform.TransformDirection(Vector3.forward) * 1000, Color.red); 
         if (Physics.Raycast(sniperCamera.transform.position, sniperCamera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
@@ -85,12 +71,6 @@ public class SniperPlayer : MonoBehaviour
                     currentSelect = null;
                 }
             }
-            //Debug.Log("RAYCAST CHATACTER"); 
-        }
-        else
-        { 
-            //Debug.DrawRay(transform.position + new Vector3(0, 3, 0), transform.TransformDirection(Vector3.forward) * 1000, Color.white); 
-            //Debug.Log("Did not Hit"); 
         }
 
         if (Input.GetMouseButton(0) && currentSelect != null)
@@ -98,6 +78,10 @@ public class SniperPlayer : MonoBehaviour
             if(currentSelect.TryGetComponent<NPCMovement>(out NPCMovement npcMovement))
             {
                 npcMovement.Kill();
+            }
+            else if(currentSelect.TryGetComponent<SpyPlayer>(out SpyPlayer spyPlayer))
+            {
+                //SNIPER WIN
             }
         }
     }

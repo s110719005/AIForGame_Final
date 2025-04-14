@@ -19,6 +19,7 @@ public class NPCMovement : MonoBehaviour
     {
         PickNewDestination();
         isWaiting = false;
+        animator.SetFloat("State", 0.7f);
     }
 
     public void OnUpdate()
@@ -40,8 +41,6 @@ public class NPCMovement : MonoBehaviour
         {
             Vector3 direction = (targetPosition - transform.position).normalized;
             //Move
-            //transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
-            
             animator.SetFloat("Vert", currentSpeed);
 
             //Rotation
@@ -63,19 +62,7 @@ public class NPCMovement : MonoBehaviour
                     toIdleCoroutine = null;
                 }
                 toIdleCoroutine = StartCoroutine(ChangeToIdleCoroutine());
-                //TODO: a slow down coroutine
-                //animator.SetFloat("Hor", 0);
-                //animator.SetFloat("Vert", 0);
             }
-        }
-
-        // 動畫控制
-        if (animator != null)
-        {
-            bool isMoving = !isWaiting && Vector3.Distance(transform.position, targetPosition) > 0.1f;
-
-            animator.SetFloat("State", 0.7f);
-
         }
 
         //RaycastHit hit;
