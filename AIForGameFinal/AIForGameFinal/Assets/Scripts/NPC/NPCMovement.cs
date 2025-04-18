@@ -34,7 +34,8 @@ public class NPCMovement : MonoBehaviour
     public void MakeNewDecision()
     {
         //TODO: Change this to actual decision making script
-        currentAction = actions[0];
+        int index = Random.Range(0, actions.Count);
+        currentAction = actions[index];
         currentAction.OnStart(animator);
     }
 
