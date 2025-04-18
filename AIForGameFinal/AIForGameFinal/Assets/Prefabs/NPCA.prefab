@@ -795,6 +795,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1673554602859052353}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6251475410419428986}
   m_SourcePrefab: {fileID: 100100000, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
 --- !u!4 &561939782941287440 stripped
 Transform:
@@ -823,6 +826,8 @@ MonoBehaviour:
   moveSpeed: 1
   wanderRadius: 15
   waitTime: 2
+  actions:
+  - {fileID: -6251475410419428986}
 --- !u!143 &-8639502314552694346
 CharacterController:
   m_ObjectHideFlags: 0
@@ -889,6 +894,21 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &-6251475410419428986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902894681121128106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e47a51706b02734498e94101fd879da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 1
+  wanderRadius: 5
+  waitTime: 2
 --- !u!95 &5849126526026382954 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
