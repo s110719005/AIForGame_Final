@@ -10,6 +10,7 @@ public class NPCMovement : MonoBehaviour
     [SerializeField] private float wanderRadius = 5f;
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private List<ActionBase> actions;
+    [SerializeField] private ActionIntercept interceptAction;
 
     private Vector3 targetPosition;
     private float waitTimer = 0f;
@@ -44,5 +45,15 @@ public class NPCMovement : MonoBehaviour
         animator.SetTrigger("Trigger_Die");
         characterController.enabled = false;
         transform.position -= new Vector3(0, 0.1f, 0);
+    }
+
+    public void SetGEPAction(Vector3 targetPosition)
+    {
+        if (interceptAction != null)
+        {
+            interceptAction.SetTarget(targetPosition);
+            currentAction = interceptAction;
+            currentAction.OnStart(animator);
+        }
     }
 }
