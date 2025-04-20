@@ -130,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.48
+      value: -10.57
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
       propertyPath: m_LocalPosition.y
@@ -138,7 +138,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.621
+      value: 5.94
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
       propertyPath: m_LocalRotation.w
@@ -802,6 +802,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
       insertIndex: -1
       addedObject: {fileID: -1074041947374564719}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5384192039309133730}
   m_SourcePrefab: {fileID: 100100000, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
 --- !u!4 &561939782941287440 stripped
 Transform:
@@ -833,6 +836,7 @@ MonoBehaviour:
   actions:
   - {fileID: -3869402357530711061}
   - {fileID: -1074041947374564719}
+  interceptAction: {fileID: 5384192039309133730}
 --- !u!143 &-8639502314552694346
 CharacterController:
   m_ObjectHideFlags: 0
@@ -907,6 +911,21 @@ MonoBehaviour:
   npcCMovement: {fileID: 1167006434679251805}
   moveSpeed: 1
   targetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &5384192039309133730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902894681121128106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f89fda5bec9f1541aed2fe578fa5651, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcCMovement: {fileID: 1167006434679251805}
+  moveSpeed: 1.5
+  interceptDistance: 2
 --- !u!95 &5849126526026382954 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: ad472b939cd48144e9521d873c2e3018, type: 3}

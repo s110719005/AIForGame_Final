@@ -93558,9 +93558,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a92156747aa102b4ead3601d0a5480d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpy: {fileID: 327003673}
-  npcs: []
+  playerSpy: {fileID: 1263853859}
   checkInterval: 1
+  maxInterceptDistance: 5
 --- !u!4 &454035104
 Transform:
   m_ObjectHideFlags: 0
@@ -255642,6 +255642,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263849479}
   m_Mesh: {fileID: 4300000, guid: 3900d928ccec44041bdd0c3d50026c02, type: 3}
+--- !u!4 &1263853859 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 561939782941287440, guid: 510cb5a0616f5064b822799b5a5014d4, type: 3}
+  m_PrefabInstance: {fileID: 1611862294}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1263888154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -268018,6 +268023,18 @@ PrefabInstance:
     - target: {fileID: 902894681121128106, guid: e16956685a1ceec4882a5141629f0cc6, type: 3}
       propertyPath: m_Name
       value: NPCB
+      objectReference: {fileID: 0}
+    - target: {fileID: 5384192039309133730, guid: e16956685a1ceec4882a5141629f0cc6, type: 3}
+      propertyPath: moveSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5384192039309133730, guid: e16956685a1ceec4882a5141629f0cc6, type: 3}
+      propertyPath: MaxDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5384192039309133730, guid: e16956685a1ceec4882a5141629f0cc6, type: 3}
+      propertyPath: stopDistance
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

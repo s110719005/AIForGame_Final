@@ -1,46 +1,59 @@
 using UnityEngine;
+
 public class ActionIntercept : ActionBase
 {
-    [SerializeField] private float moveSpeed = 1.5f;
-    [SerializeField] private float interceptDistance = 2f;
+    [SerializeField] private float moveSpeed = 3.5f;
+    [SerializeField] private float stopDistance = 3f;
+    [SerializeField] private float MaxDistance = 10f;
 
     private Vector3 interceptPoint;
     private Animator currentAnimator;
-    private float currentSpeed;
+    private bool isIntercepting = false;
 
     public void SetTarget(Vector3 targetGoal)
     {
+        if (GEPCore.Instance == null || GEPCore.Instance.PlayerSpy == null) return;
+
         Vector3 playerPos = GEPCore.Instance.PlayerSpy.position;
-        interceptPoint = playerPos + (targetGoal - playerPos).normalized * interceptDistance;
+        interceptPoint = playerPos + (targetGoal - playerPos).normalized * 2f;
+        isIntercepting = true;
     }
 
     public override void OnStart(Animator animator)
     {
         base.OnStart(animator);
         currentAnimator = animator;
-        currentAnimator.SetFloat("State", 0.9f);
-        currentSpeed = moveSpeed;
+        currentAnimator.SetFloat("Vert", 1f);
     }
 
     public override void OnUpdate()
     {
+        if (!isIntercepting) return;
+
         Vector3 direction = (interceptPoint - currentAnimator.transform.position).normalized;
+        currentAnimator.transform.position += direction * moveSpeed * Time.deltaTime;
 
-        currentAnimator.SetFloat("Vert", currentSpeed);
-
-        direction.y = 0f;
+        direction.y = 0;
         if (direction != Vector3.zero)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            Quaternion targetRot = Quaternion.LookRotation(direction);
             currentAnimator.transform.rotation = Quaternion.Slerp(
                 currentAnimator.transform.rotation,
-                targetRotation,
-                Time.deltaTime * 8f);
+                targetRot,
+                Time.deltaTime * 10f
+            );
         }
 
-        if (Vector3.Distance(currentAnimator.transform.position, interceptPoint) < 0.5f)
+        if (Vector3.Distance(currentAnimator.transform.position, interceptPoint) < stopDistance || Vector3.Distance(currentAnimator.transform.position, interceptPoint) > MaxDistance)
         {
-            MakeNewDecision();
+            ReturnToNormalBehavior();
         }
+    }
+
+    private void ReturnToNormalBehavior()
+    {
+        isIntercepting = false;
+        MakeNewDecision();
+        GEPCore.Instance.OnElicitorComplete();
     }
 }

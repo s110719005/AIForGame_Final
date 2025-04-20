@@ -33,7 +33,7 @@ public class ActionMimic : ActionBase
         if (playerMovement.magnitude > 0.1f)
         {
             Vector3 targetPos = currentAnimator.transform.position + playerMovement.normalized;
-            currentAnimator.SetFloat("Vert", 0.7f);
+            currentAnimator.SetFloat("Vert", 1f);
             currentAnimator.transform.LookAt(targetPos);
         }
         lastPlayerPosition = playerSpy.position;

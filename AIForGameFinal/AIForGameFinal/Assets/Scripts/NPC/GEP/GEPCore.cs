@@ -6,9 +6,10 @@ public class GEPCore : MonoBehaviour
     public static GEPCore Instance;
 
     [SerializeField] private Transform playerSpy;
-    [SerializeField] private List<NPCMovement> npcs;
     [SerializeField] private float checkInterval = 1f;
+    [SerializeField] private float maxInterceptDistance = 0f;
 
+    private List<NPCMovement> npcs = new List<NPCMovement>();
     private List<Vector3> playerPathHistory = new List<Vector3>();
     private float timer = 0f;
     private Vector3 predictedGoal;
@@ -18,6 +19,7 @@ public class GEPCore : MonoBehaviour
     {
         Instance = this;
     }
+
     public void SetNPCs(List<NPCMovement> npcList)
     {
         npcs = npcList;
@@ -38,9 +40,9 @@ public class GEPCore : MonoBehaviour
         RecordPlayerPath();
         predictedGoal = PredictPlayerGoal();
 
-        if (predictedGoal != Vector3.zero)
+        if (predictedGoal != Vector3.zero && activeElicitor == null)
         {
-            AssignElicitor(predictedGoal);
+            AssignClosestElicitor(predictedGoal);
         }
     }
 
@@ -66,6 +68,11 @@ public class GEPCore : MonoBehaviour
 
         foreach (var npc in npcs)
         {
+            if (npc == null) continue;
+
+            float distanceToPlayer = Vector3.Distance(npc.transform.position, playerSpy.position);
+            if (distanceToPlayer > maxInterceptDistance) continue;
+
             Vector3 toNPC = (npc.transform.position - playerPathHistory[0]).normalized;
             float score = Vector3.Dot(direction, toNPC);
 
@@ -79,14 +86,17 @@ public class GEPCore : MonoBehaviour
         return maxScore > 0.7f ? bestGoal : Vector3.zero;
     }
 
-    private void AssignElicitor(Vector3 goal)
+    private void AssignClosestElicitor(Vector3 goal)
     {
         NPCMovement bestElicitor = null;
         float minDistance = float.MaxValue;
 
         foreach (var npc in npcs)
         {
-            if (npc == activeElicitor) continue;
+            if (npc == null || npc == activeElicitor) continue;
+
+            float distanceToPlayer = Vector3.Distance(npc.transform.position, playerSpy.position);
+            if (distanceToPlayer > maxInterceptDistance) continue;
 
             float distToPath = GetDistanceToPlayerPath(npc.transform.position);
             if (distToPath < minDistance)
@@ -103,21 +113,23 @@ public class GEPCore : MonoBehaviour
         }
     }
 
+    public void OnElicitorComplete()
+    {
+        activeElicitor = null;
+    }
+
     private float GetDistanceToPlayerPath(Vector3 point)
     {
         float minDist = float.MaxValue;
-
         for (int i = 1; i < playerPathHistory.Count; i++)
         {
             Vector3 closestPoint = GetClosestPointOnSegment(
                 playerPathHistory[i - 1],
                 playerPathHistory[i],
                 point);
-
             float currentDist = Vector3.Distance(point, closestPoint);
             minDist = Mathf.Min(minDist, currentDist);
         }
-
         return minDist;
     }
 
