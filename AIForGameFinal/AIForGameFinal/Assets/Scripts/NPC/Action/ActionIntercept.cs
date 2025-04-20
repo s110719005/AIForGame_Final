@@ -10,7 +10,6 @@ public class ActionIntercept : ActionBase
 
     public void SetTarget(Vector3 targetGoal)
     {
-        // 计算拦截点（在玩家和目标之间）
         Vector3 playerPos = GEPCore.Instance.PlayerSpy.position;
         interceptPoint = playerPos + (targetGoal - playerPos).normalized * interceptDistance;
     }
@@ -19,7 +18,7 @@ public class ActionIntercept : ActionBase
     {
         base.OnStart(animator);
         currentAnimator = animator;
-        currentAnimator.SetFloat("State", 0.9f); // 更快的行走状态
+        currentAnimator.SetFloat("State", 0.9f);
         currentSpeed = moveSpeed;
     }
 
@@ -27,10 +26,8 @@ public class ActionIntercept : ActionBase
     {
         Vector3 direction = (interceptPoint - currentAnimator.transform.position).normalized;
 
-        // 移动
         currentAnimator.SetFloat("Vert", currentSpeed);
 
-        // 旋转
         direction.y = 0f;
         if (direction != Vector3.zero)
         {
@@ -38,13 +35,12 @@ public class ActionIntercept : ActionBase
             currentAnimator.transform.rotation = Quaternion.Slerp(
                 currentAnimator.transform.rotation,
                 targetRotation,
-                Time.deltaTime * 8f); // 更快的旋转
+                Time.deltaTime * 8f);
         }
 
-        // 到达拦截点
         if (Vector3.Distance(currentAnimator.transform.position, interceptPoint) < 0.5f)
         {
-            MakeNewDecision(); // 返回正常行为
+            MakeNewDecision();
         }
     }
 }
