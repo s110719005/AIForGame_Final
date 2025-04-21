@@ -8,6 +8,7 @@ public class SniperPlayer : MonoBehaviour
     [SerializeField] private float cameraSensitivity = 5;
     [SerializeField] private Camera playerCamera;
     [SerializeField] private GameObject canvas;
+    [SerializeField] private GameObject playercanvas;
 
     private bool usingSniperCamera = true;
     private float xRotation = 0f;
@@ -23,6 +24,7 @@ public class SniperPlayer : MonoBehaviour
         sniperCamera.enabled = true;
         playerCamera.enabled = false;
         canvas.SetActive(true);
+        playercanvas.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -102,6 +104,7 @@ public class SniperPlayer : MonoBehaviour
             sniperCamera.enabled = usingSniperCamera;
             playerCamera.enabled = !usingSniperCamera;
             canvas.SetActive(usingSniperCamera);
+            playercanvas.SetActive(!usingSniperCamera);
 
             if (usingSniperCamera)
             {
