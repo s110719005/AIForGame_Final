@@ -3258,7 +3258,7 @@ GameObject:
   - component: {fileID: 14384150}
   - component: {fileID: 14384152}
   - component: {fileID: 14384151}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101777,7 +101777,7 @@ GameObject:
   - component: {fileID: 494306334}
   - component: {fileID: 494306333}
   - component: {fileID: 494306332}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Raycast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131329,8 +131329,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 577706493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.25, y: 0.5}
+  m_AnchorMax: {x: 0.25, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 5, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -132279,7 +132279,7 @@ GameObject:
   - component: {fileID: 644577465}
   - component: {fileID: 644577467}
   - component: {fileID: 644577466}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Main Camera (1)
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -132337,7 +132337,7 @@ Camera:
   m_LensShift: {x: 0, y: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.5
     y: 0
     width: 1
     height: 1
@@ -132349,7 +132349,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -158845,7 +158845,7 @@ GameObject:
   - component: {fileID: 794605607}
   - component: {fileID: 794605609}
   - component: {fileID: 794605608}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192693,7 +192693,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -192737,7 +192737,7 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
+    width: 0.5
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
@@ -192747,7 +192747,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 375
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -305083,8 +305083,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 577706493}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.25, y: 0.5}
+  m_AnchorMax: {x: 0.25, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 50, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -337268,7 +337268,7 @@ GameObject:
   - component: {fileID: 1683082619}
   - component: {fileID: 1683082618}
   - component: {fileID: 1683082617}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Raycast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373228,7 +373228,7 @@ GameObject:
   - component: {fileID: 1861689770}
   - component: {fileID: 1861689772}
   - component: {fileID: 1861689771}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424045,7 +424045,7 @@ GameObject:
   - component: {fileID: 2136527769}
   - component: {fileID: 2136527768}
   - component: {fileID: 2136527767}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: PlayerCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

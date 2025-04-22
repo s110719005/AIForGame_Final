@@ -6,11 +6,7 @@ public class SniperPlayer : MonoBehaviour
     [SerializeField] private Camera sniperCamera;
     [SerializeField] private float horizontalSpeed = 5;
     [SerializeField] private float cameraSensitivity = 5;
-    [SerializeField] private Camera playerCamera;
-    [SerializeField] private GameObject canvas;
-    [SerializeField] private GameObject playercanvas;
 
-    private bool usingSniperCamera = true;
     private float xRotation = 0f;
     LayerMask layerMask;
     private GameObject currentSelect;
@@ -18,13 +14,6 @@ public class SniperPlayer : MonoBehaviour
     void Start()
     {
         layerMask = LayerMask.NameToLayer("Character");
-
-        usingSniperCamera = true;
-
-        sniperCamera.enabled = true;
-        playerCamera.enabled = false;
-        canvas.SetActive(true);
-        playercanvas.SetActive(false);
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -94,29 +83,6 @@ public class SniperPlayer : MonoBehaviour
             else if(currentSelect.TryGetComponent<SpyPlayer>(out SpyPlayer spyPlayer))
             {
                 //SNIPER WIN
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            usingSniperCamera = !usingSniperCamera;
-
-            sniperCamera.enabled = usingSniperCamera;
-            playerCamera.enabled = !usingSniperCamera;
-            canvas.SetActive(usingSniperCamera);
-            playercanvas.SetActive(!usingSniperCamera);
-
-            if (usingSniperCamera)
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-
             }
         }
 
