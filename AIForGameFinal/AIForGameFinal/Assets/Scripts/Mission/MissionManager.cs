@@ -14,6 +14,7 @@ public class MissionManager : MonoBehaviour // mission point manager
         {
             if(!mission.DoesPlayerHasMission()) { continue;}
             if(mission.IsMissionComplete()) { continue; }
+            if(!mission.CanExecute()) { continue; }
             if(Vector3.Distance(SpyPlayer.Instance.transform.position, mission.transform.position) < possibleRange)
             {
                 possibleMissions.Add(mission);

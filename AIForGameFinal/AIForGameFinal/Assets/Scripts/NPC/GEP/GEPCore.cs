@@ -12,6 +12,7 @@ public class GEPCore : MonoBehaviour
 
     private List<NPCMovement> npcs = new List<NPCMovement>();
     List<Mission> possibleMissions = new List<Mission>();
+    List<Mission> priorityMissions = new List<Mission>();
     //private List<Vector3> playerPathHistory = new List<Vector3>();
     private float timer = 0f;
     private Mission predictedGoal;
@@ -67,9 +68,26 @@ public class GEPCore : MonoBehaviour
         possibleMissions = missionManager.GetPossibleMissionSpot();
         Mission bestGoal = null;
         float minDistance = Mathf.Infinity;
+        int firstPriority = 10;
         float currentDistance = 0;
 
+        //prority first
         foreach (Mission mission in possibleMissions)
+        {
+            mission.SetPrioirity();
+            if(firstPriority > mission.priority)
+            {
+                firstPriority = mission.priority;
+            }
+        }
+        priorityMissions.Clear();
+        foreach (Mission mission in possibleMissions)
+        {
+            if(mission.priority == firstPriority) { priorityMissions.Add(mission); }
+        }
+
+        //distance
+        foreach (Mission mission in priorityMissions)
         {
             currentDistance = Vector3.Distance(SpyPlayer.Instance.transform.position, mission.transform.position);
             if(currentDistance < minDistance)

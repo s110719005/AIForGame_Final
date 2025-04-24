@@ -138,4 +138,15 @@ public class SpyPlayer : MonoBehaviour
         }
         return false;
     }
+
+    internal int GetPriority(MissionType missionType)
+    {
+        int index = 0;
+        foreach (var mission in playerMissions)
+        {
+            if(mission.missionType == missionType) { return index;}
+            index++;
+        }
+        return -1;
+    }
 }
