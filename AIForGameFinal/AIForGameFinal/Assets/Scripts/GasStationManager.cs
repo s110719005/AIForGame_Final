@@ -61,6 +61,11 @@ public class GasStationManager : MonoBehaviour
         return false;
     }
 
+    public void ReturnSpot(GasStationSpot gasStationSpot)
+    {
+        gasStationSpot.isOccupied = false;
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ActionBase : MonoBehaviour
 {
-    [SerializeField] protected NPCMovement npcCMovement;
+    [SerializeField] protected NPCMovement npcMovement;
     public virtual void OnStart(Animator animator)
     {
 
@@ -21,6 +21,6 @@ public class ActionBase : MonoBehaviour
 
     public void MakeNewDecision()
     {
-        npcCMovement.MakeNewDecision();
+        npcMovement.MakeRandomDecision();
     }
 }

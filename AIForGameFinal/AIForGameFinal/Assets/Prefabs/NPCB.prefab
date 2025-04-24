@@ -805,6 +805,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5384192039309133730}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3277237562743209207}
   m_SourcePrefab: {fileID: 100100000, guid: ad472b939cd48144e9521d873c2e3018, type: 3}
 --- !u!4 &561939782941287440 stripped
 Transform:
@@ -836,7 +839,7 @@ MonoBehaviour:
   actions:
   - {fileID: -3869402357530711061}
   - {fileID: -1074041947374564719}
-  interceptAction: {fileID: 5384192039309133730}
+  actionClobber: {fileID: 3277237562743209207}
 --- !u!143 &-8639502314552694346
 CharacterController:
   m_ObjectHideFlags: 0
@@ -857,8 +860,8 @@ CharacterController:
   serializedVersion: 3
   m_Height: 2
   m_Radius: 0.26
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_SlopeLimit: 20
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1.05, z: 0}
@@ -892,7 +895,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e47a51706b02734498e94101fd879da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcCMovement: {fileID: 1167006434679251805}
+  npcMovement: {fileID: 1167006434679251805}
   moveSpeed: 1
   wanderRadius: 5
   waitTime: 2
@@ -908,7 +911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eb01e202cfc43244a7d81f50911a99b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcCMovement: {fileID: 1167006434679251805}
+  npcMovement: {fileID: 1167006434679251805}
   moveSpeed: 1
   targetPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &5384192039309133730
@@ -923,9 +926,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f89fda5bec9f1541aed2fe578fa5651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  npcCMovement: {fileID: 1167006434679251805}
+  npcMovement: {fileID: 1167006434679251805}
   moveSpeed: 1.5
-  interceptDistance: 2
+  stopDistance: 3
+  MaxDistance: 10
+--- !u!114 &3277237562743209207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902894681121128106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cc999b23400d294eb20643bf0c8a8da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcMovement: {fileID: 1167006434679251805}
 --- !u!95 &5849126526026382954 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: ad472b939cd48144e9521d873c2e3018, type: 3}

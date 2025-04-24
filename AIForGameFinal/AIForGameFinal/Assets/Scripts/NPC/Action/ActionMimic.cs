@@ -12,7 +12,7 @@ public class ActionMimic : ActionBase
     {
         base.OnStart(animator);
         currentAnimator = animator;
-        playerSpy = GEPCore.Instance.PlayerSpy;
+        //playerSpy = GEPCore.Instance.PlayerSpy;
         lastPlayerPosition = playerSpy.position;
         timer = 0f;
     }

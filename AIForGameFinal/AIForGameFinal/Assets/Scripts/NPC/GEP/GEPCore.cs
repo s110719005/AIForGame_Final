@@ -16,7 +16,9 @@ public class GEPCore : MonoBehaviour
     //private List<Vector3> playerPathHistory = new List<Vector3>();
     private float timer = 0f;
     private Mission predictedGoal;
+    public Mission PredictedGoal => predictedGoal;
     private NPCMovement activeElicitor;
+    private bool isGepOn = true;
 
     private void Awake()
     {
@@ -30,11 +32,19 @@ public class GEPCore : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= checkInterval)
+        if(Input.GetKeyDown(KeyCode.G)) { isGepOn = !isGepOn; }
+        if(isGepOn)
+        { 
+            timer += Time.deltaTime;
+            if (timer >= checkInterval)
+            {
+                timer = 0f;
+                UpdateGEP();
+            }
+        }
+        else
         {
-            timer = 0f;
-            UpdateGEP();
+            //USE MIMIC
         }
     }
 
@@ -110,12 +120,14 @@ public class GEPCore : MonoBehaviour
         {
             if (npc == null || npc == activeElicitor) continue;
 
-            float distanceToPlayer = Vector3.Distance(npc.transform.position, SpyPlayer.Instance.transform.position);
-            if (distanceToPlayer < maxInterceptDistance) 
+            float distanceToMission = Vector3.Distance(npc.transform.position, mission.transform.position);
+            if (distanceToMission < minDistance) 
             { 
                 bestElicitor = npc;
-                minDistance = distanceToPlayer;
+                minDistance = distanceToMission;
             }
+
+            //TODO: check if they can interrupt in the future time
 
             // float distToPath = GetDistanceToPlayerPath(npc.transform.position);
             // if (distToPath < minDistance)
@@ -130,6 +142,11 @@ public class GEPCore : MonoBehaviour
             activeElicitor = bestElicitor;
             bestElicitor.SetGEPAction(mission);
         }
+    }
+
+    public void ClearElicitor()
+    {
+        activeElicitor = null;
     }
 
     public void OnElicitorComplete()
@@ -160,8 +177,8 @@ public class GEPCore : MonoBehaviour
     //     return a + ab * t;
     // }
 
-    public Transform PlayerSpy
-    {
-        get { return playerSpy; }
-    }
+    // public Transform PlayerSpy
+    // {
+    //     get { return playerSpy; }
+    // }
 }

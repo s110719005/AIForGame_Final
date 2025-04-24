@@ -5,7 +5,7 @@ public class ActionArrivePlace : ActionBase
 {
     [SerializeField] private float moveSpeed = 1;
     [SerializeField] protected Vector3 targetPosition;
-    private Animator currentAnimator;
+    protected Animator currentAnimator;
     protected bool isArrived;
     private Coroutine toIdleCoroutine;
     private float currentSpeed;

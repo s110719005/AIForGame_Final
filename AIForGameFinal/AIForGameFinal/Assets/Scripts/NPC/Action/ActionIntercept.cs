@@ -12,10 +12,10 @@ public class ActionIntercept : ActionBase
 
     public void SetTarget(Vector3 targetGoal)
     {
-        if (GEPCore.Instance == null || GEPCore.Instance.PlayerSpy == null) return;
+        //if (GEPCore.Instance == null || GEPCore.Instance.PlayerSpy == null) return;
 
-        Vector3 playerPos = GEPCore.Instance.PlayerSpy.position;
-        interceptPoint = playerPos + (targetGoal - playerPos).normalized * 2f;
+        //Vector3 playerPos = GEPCore.Instance.PlayerSpy.position;
+        //interceptPoint = playerPos + (targetGoal - playerPos).normalized * 2f;
         isIntercepting = true;
     }
 

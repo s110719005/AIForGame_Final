@@ -88,7 +88,8 @@ public class SpyPlayer : MonoBehaviour
         } while (second == first);
         PlayerMission playerMission1 = new PlayerMission
         {
-            missionType = (MissionType)first,
+            //missionType = (MissionType)first,
+            missionType = (MissionType)0,
             isComplete = false
         };
 

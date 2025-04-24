@@ -42,7 +42,8 @@ public class Mission : MonoBehaviour
         {
             case MissionType.gasStation:
                 if(GasStationManager.instance.HasEmptySpot()) { return true;}
-                break;
+                return true;
+                //break;
             case MissionType.hotdog:
                 return true;
                 //break;

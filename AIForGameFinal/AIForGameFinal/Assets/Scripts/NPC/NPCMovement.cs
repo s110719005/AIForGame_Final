@@ -10,18 +10,14 @@ public class NPCMovement : MonoBehaviour
     [SerializeField] private float wanderRadius = 5f;
     [SerializeField] private float waitTime = 2f;
     [SerializeField] private List<ActionBase> actions;
-    [SerializeField] private ActionIntercept interceptAction;
+    //[SerializeField] private ActionIntercept interceptAction;
+    [SerializeField] private ActionClobber actionClobber;
 
-    private Vector3 targetPosition;
-    private float waitTimer = 0f;
-    private bool isWaiting = true;
-    private float currentSpeed;
-    private Coroutine toIdleCoroutine;
     private ActionBase currentAction;
 
     private void Start() 
     {
-        MakeNewDecision();
+        MakeRandomDecision();
     }
 
     public void OnUpdate()
@@ -32,11 +28,17 @@ public class NPCMovement : MonoBehaviour
         }
     }
 
-    public void MakeNewDecision()
+    public void MakeRandomDecision()
     {
         //TODO: Change this to actual decision making script
         int index = Random.Range(0, actions.Count);
-        currentAction = actions[index];
+        SwitchAction(actions[index]);
+    }
+
+    public void SwitchAction(ActionBase action)
+    {
+        if(currentAction != null) { currentAction.OnExit(); }
+        currentAction = action;
         currentAction.OnStart(animator);
     }
 
@@ -51,6 +53,8 @@ public class NPCMovement : MonoBehaviour
     {
         //switch the state to observer
         Debug.Log("SET GEP: " + mission.Type);
+        actionClobber.SetMission(mission);
+        SwitchAction(actionClobber);
 
         // if (interceptAction != null)
         // {
