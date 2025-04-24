@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SpyPlayer : MonoBehaviour
@@ -9,10 +11,39 @@ public class SpyPlayer : MonoBehaviour
     [SerializeField] private int rotationSpeed = 5;
 
     private Coroutine toIdleCoroutine;
+
+    private List<PlayerMission> playerMissions = new List<PlayerMission>();
+
+    public static SpyPlayer Instance;
+    
+    void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        AssignMission();
+        Mission.onMissionTrigger += OnMissionTrigger;
+    }
+
+    private void OnMissionTrigger(MissionType type)
+    {
+       foreach (var mission in playerMissions)
+       {
+            if(mission.isComplete) { continue; }
+            if(mission.missionType == type)
+            {
+                mission.CompleteMission();
+            }
+       }
     }
 
     // Update is called once per frame
@@ -46,6 +77,33 @@ public class SpyPlayer : MonoBehaviour
         }
     }
 
+    private void AssignMission()
+    {
+        int first = UnityEngine.Random.Range(0, 4);
+
+        int second;
+        do
+        {
+            second = UnityEngine.Random.Range(0, 4);
+        } while (second == first);
+        PlayerMission playerMission1 = new PlayerMission
+        {
+            missionType = (MissionType)first,
+            isComplete = false
+        };
+
+        PlayerMission playerMission2 = new PlayerMission
+        {
+            missionType = (MissionType)second,
+            isComplete = false
+        };
+
+        playerMissions.Add(playerMission1);
+        playerMissions.Add(playerMission2);
+
+        //TODO: Update UI
+    }
+
     private IEnumerator ChangeToIdleCoroutine()
     {
         float currentSpeed = 1;
@@ -61,5 +119,23 @@ public class SpyPlayer : MonoBehaviour
         }
         animator.SetFloat("Vert", 0);
         yield return null;
+    }
+
+    internal bool DoesPlayerHasMission(MissionType missionType)
+    {
+        foreach (var mission in playerMissions)
+        {
+            if(mission.missionType == missionType) { return true;}
+        }
+        return false;
+    }
+
+    internal bool IsMissionComplete(MissionType missionType)
+    {
+        foreach (var mission in playerMissions)
+        {
+            if(mission.missionType == missionType && mission.isComplete) { return true;}
+        }
+        return false;
     }
 }

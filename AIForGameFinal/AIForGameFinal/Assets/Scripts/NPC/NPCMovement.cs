@@ -47,13 +47,16 @@ public class NPCMovement : MonoBehaviour
         transform.position -= new Vector3(0, 0.1f, 0);
     }
 
-    public void SetGEPAction(Vector3 targetPosition)
+    public void SetGEPAction(Mission mission)
     {
-        if (interceptAction != null)
-        {
-            interceptAction.SetTarget(targetPosition);
-            currentAction = interceptAction;
-            currentAction.OnStart(animator);
-        }
+        //switch the state to observer
+        Debug.Log("SET GEP: " + mission.Type);
+
+        // if (interceptAction != null)
+        // {
+        //     interceptAction.SetTarget(targetPosition);
+        //     currentAction = interceptAction;
+        //     currentAction.OnStart(animator);
+        // }
     }
 }
