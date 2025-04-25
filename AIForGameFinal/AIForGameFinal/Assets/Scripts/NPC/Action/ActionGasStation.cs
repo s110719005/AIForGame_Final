@@ -14,6 +14,7 @@ public class ActionGasStation : ActionArrivePlace
         isArrived = false;
         SetDestination();
         if(target == null) { isArrived = true;}
+        timer = 0;
     }
 
     public override void OnUpdate()

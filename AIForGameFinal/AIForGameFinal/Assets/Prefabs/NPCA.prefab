@@ -965,6 +965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcMovement: {fileID: 1167006434679251805}
+  collectClobberRadius: 0.8
 --- !u!95 &5849126526026382954 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: ad472b939cd48144e9521d873c2e3018, type: 3}

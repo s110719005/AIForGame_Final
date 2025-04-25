@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class SpyPlayer : MonoBehaviour
@@ -9,6 +10,7 @@ public class SpyPlayer : MonoBehaviour
     [SerializeField] private GameObject spyPlayer;
     [SerializeField] private float horizontalSpeed = 1;
     [SerializeField] private int rotationSpeed = 5;
+    [SerializeField] private List<TextMeshProUGUI> missionTexts;
 
     private Coroutine toIdleCoroutine;
 
@@ -37,12 +39,12 @@ public class SpyPlayer : MonoBehaviour
 
     private void OnMissionTrigger(MissionType type)
     {
-       foreach (var mission in playerMissions)
+       for(int i = 0; i < playerMissions.Count; i++)
        {
-            if(mission.isComplete) { continue; }
-            if(mission.missionType == type)
+            if(playerMissions[i].missionType == type)
             {
-                mission.CompleteMission();
+                playerMissions[i].CompleteMission();
+                missionTexts[i].color = Color.green;
             }
        }
     }
@@ -102,7 +104,24 @@ public class SpyPlayer : MonoBehaviour
         playerMissions.Add(playerMission1);
         playerMissions.Add(playerMission2);
 
-        //TODO: Update UI
+        missionTexts[0].text = GetMissionDescription(playerMission1.missionType);
+        missionTexts[1].text = GetMissionDescription(playerMission2.missionType);
+    }
+
+    private string GetMissionDescription(MissionType missionType)
+    {
+        switch(missionType)
+        {
+            case MissionType.gasStation:
+                return "Mission: Stay at gas Station for 5 sec";
+            case MissionType.hotdog:
+                return "Mission: Go to hotdog stand";
+            case MissionType.chat:
+                return "Mission: Chat with clown for 3 sec";
+            case MissionType.collect:
+                return "Mission: Pick up hotdog";
+        }
+        return "";
     }
 
     private IEnumerator ChangeToIdleCoroutine()

@@ -928,6 +928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcMovement: {fileID: 1167006434679251805}
+  collectClobberRadius: 0.8
 --- !u!114 &-8801426026691718156
 MonoBehaviour:
   m_ObjectHideFlags: 0

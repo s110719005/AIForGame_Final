@@ -1,5 +1,8 @@
 using System.Collections.Generic;
+using System.Threading;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class GEPCore : MonoBehaviour
 {
@@ -9,6 +12,7 @@ public class GEPCore : MonoBehaviour
     [SerializeField] private float checkInterval = 1f;
     [SerializeField] private float maxInterceptDistance = 0f;
     [SerializeField] private MissionManager missionManager;
+    [SerializeField] private TextMeshProUGUI gepDebugText;
 
     private List<NPCMovement> npcs = new List<NPCMovement>();
     List<Mission> possibleMissions = new List<Mission>();
@@ -19,6 +23,8 @@ public class GEPCore : MonoBehaviour
     public Mission PredictedGoal => predictedGoal;
     private NPCMovement activeElicitor;
     private bool isGepOn = true;
+    private bool isPause = false;
+    private float pauseTimer = 0;
 
     private void Awake()
     {
@@ -34,8 +40,18 @@ public class GEPCore : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.G)) 
         { 
-            Debug.Log("GEP on: " + isGepOn);
             isGepOn = !isGepOn; 
+            Debug.Log("GEP on: " + isGepOn);
+        }
+        if(isPause)
+        {
+            pauseTimer += Time.deltaTime;
+            if(pauseTimer > 15)
+            {
+                pauseTimer = 0;
+                isPause = false;
+            }
+            return;
         }
         if(isGepOn)
         { 
@@ -56,6 +72,11 @@ public class GEPCore : MonoBehaviour
     {
         //RecordPlayerPath();
         predictedGoal = PredictPlayerGoal();
+
+        if(predictedGoal != null)
+        {
+            gepDebugText.text = "GEP PREDICTED ACTION: + "  + predictedGoal.Type;
+        }
 
         if (predictedGoal != null && activeElicitor == null)
         {
@@ -145,6 +166,7 @@ public class GEPCore : MonoBehaviour
         {
             activeElicitor = bestElicitor;
             bestElicitor.SetGEPAction(mission);
+            isPause = true;
         }
     }
 
