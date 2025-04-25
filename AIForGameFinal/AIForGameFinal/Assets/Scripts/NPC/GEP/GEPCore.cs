@@ -32,7 +32,11 @@ public class GEPCore : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.G)) { isGepOn = !isGepOn; }
+        if(Input.GetKeyDown(KeyCode.G)) 
+        { 
+            Debug.Log("GEP on: " + isGepOn);
+            isGepOn = !isGepOn; 
+        }
         if(isGepOn)
         { 
             timer += Time.deltaTime;

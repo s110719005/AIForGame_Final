@@ -15,6 +15,7 @@ public class SpyPlayer : MonoBehaviour
     private List<PlayerMission> playerMissions = new List<PlayerMission>();
 
     public static SpyPlayer Instance;
+    public float CurrentSpeed => animator.GetFloat("Vert");
     
     void Awake()
     {
@@ -88,8 +89,7 @@ public class SpyPlayer : MonoBehaviour
         } while (second == first);
         PlayerMission playerMission1 = new PlayerMission
         {
-            //missionType = (MissionType)first,
-            missionType = (MissionType)0,
+            missionType = (MissionType)first,
             isComplete = false
         };
 
