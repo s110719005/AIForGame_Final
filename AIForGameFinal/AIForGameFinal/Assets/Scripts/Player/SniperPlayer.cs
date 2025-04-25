@@ -82,6 +82,7 @@ public class SniperPlayer : MonoBehaviour
             }
             else if(currentSelect.TryGetComponent<SpyPlayer>(out SpyPlayer spyPlayer))
             {
+                spyPlayer.Kill();
                 GameManager.Instance.EndGame(false);
             }
         }

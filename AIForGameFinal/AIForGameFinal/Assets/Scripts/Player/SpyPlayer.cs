@@ -186,4 +186,9 @@ public class SpyPlayer : MonoBehaviour
         }
         return -1;
     }
+
+    internal void Kill()
+    {
+        animator.SetTrigger("Trigger_Die");
+    }
 }
