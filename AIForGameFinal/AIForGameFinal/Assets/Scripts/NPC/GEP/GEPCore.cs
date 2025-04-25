@@ -45,6 +45,7 @@ public class GEPCore : MonoBehaviour
         }
         if(isPause)
         {
+            //gepDebugText.text = "GEP IS PAUSED";
             pauseTimer += Time.deltaTime;
             if(pauseTimer > 15)
             {
@@ -75,7 +76,7 @@ public class GEPCore : MonoBehaviour
 
         if(predictedGoal != null)
         {
-            gepDebugText.text = "GEP PREDICTED ACTION: + "  + predictedGoal.Type;
+            gepDebugText.text = "GEP PREDICTED ACTION: "  + predictedGoal.Type;
         }
 
         if (predictedGoal != null && activeElicitor == null)

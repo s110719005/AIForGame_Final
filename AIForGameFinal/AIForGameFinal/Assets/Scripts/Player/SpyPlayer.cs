@@ -47,6 +47,23 @@ public class SpyPlayer : MonoBehaviour
                 missionTexts[i].color = Color.green;
             }
        }
+       if(IsAllMissionComplete())
+       {
+            GameManager.Instance.EndGame(true);
+       }
+    }
+
+    private bool IsAllMissionComplete()
+    {
+        bool isComplete = true;
+        for(int i = 0; i < playerMissions.Count; i++)
+        {
+            if(!playerMissions[i].isComplete)
+            {
+                isComplete = false;
+            }
+        }
+       return isComplete;
     }
 
     // Update is called once per frame

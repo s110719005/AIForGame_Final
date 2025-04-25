@@ -82,7 +82,7 @@ public class SniperPlayer : MonoBehaviour
             }
             else if(currentSelect.TryGetComponent<SpyPlayer>(out SpyPlayer spyPlayer))
             {
-                //SNIPER WIN
+                GameManager.Instance.EndGame(false);
             }
         }
 

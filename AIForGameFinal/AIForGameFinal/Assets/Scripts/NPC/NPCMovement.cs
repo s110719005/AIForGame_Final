@@ -47,6 +47,7 @@ public class NPCMovement : MonoBehaviour
         animator.SetTrigger("Trigger_Die");
         characterController.enabled = false;
         transform.position -= new Vector3(0, 0.1f, 0);
+        GameManager.Instance.EndGame(true);
     }
 
     public void SetGEPAction(Mission mission)
